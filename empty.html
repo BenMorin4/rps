@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
     <title>Rps</title>
 </head>
 <body>
-    <script src="rps.js">
-    </script>
+    <script src="rps.js" defer></script>
+
+    <div class="score">
+        <div id="myScore" class="number">0</div>
+        <div class="number">:</div>
+        <div id="cpuScore" class="number">0</div>
+    </div>
+
+    <div id="winText" class="win"></div>
+
+    <div class="container">
+        <img src="rock.jpg" id="rock" class="choice"/>
+        <img src="paper.jpeg" id="paper" class="choice"/>
+        <img src="scissors.jpeg" id="scissors" class="choice"/>
+    </div>
+
+    <div class="resultHeader">Results</div>
+    <div id="resultLog" class="results"></div>
 </body>
 </html>

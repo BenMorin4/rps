@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    align-self: center;
+    width: 70vw;
+    height: 20vw;
+    border: 1px solid black;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.choice {
+    width: 20vw;
+    height: 20vw;
+}
+
+.score {
+    margin-top: 10vw;
+    display: flex;
+    justify-content: center;
+}
+
+.number {
+    font-size: 46px;
+}
+
+.resultHeader {
+    display: flex;
+    align-self: center;
+    margin-top: 10vw;
+}
+
+.results {
+    display: flex;
+    align-self: center;
+    justify-content: baseline;
+}
+
+.win {
+    display: flex;
+    align-self: center;
+    height: 10vw;
+    align-items: center;
+    font-size: 36px;
+}

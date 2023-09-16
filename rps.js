@@ -1,3 +1,12 @@
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const myScore = document.querySelector('#myScore');
+const cpuScore = document.querySelector('#cpuScore');
+const resultLog = document.querySelector('#resultLog');
+const winText = document.querySelector('#winText');
+var gameOver = false;
+
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3);
     if (random === 0) {
@@ -23,11 +32,11 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 
-    if (playerSelection == 'scissors') {
-        if (computerSelection == 'rock') {
+    if (playerSelection == 'paper') {
+        if (computerSelection == 'scissors') {
             return [`You Lose, ${computerSelection} beats ${playerSelection}`, 0];
         }
-        if (computerSelection == 'paper') {
+        if (computerSelection == 'rock') {
             return [`You Win, ${playerSelection} beats ${computerSelection}`, 1];
         }
     }
@@ -62,31 +71,65 @@ function chooseWinner(scores) {
     }
 }
 
+var round = 1;
+var score = [0, 0];
+function processClick(text, winner) {
+
+    var result;
+    result = scoreGame(winner); 
+
+    // Updates score
+    score[0] += result[0];
+    score[1] += result[1]; 
+
+    // Updates DOM
+    myScore.innerHTML = score[0];
+    cpuScore.innerHTML = score[1];
+    resultLog.innerHTML += `<br />${round}. ${text}`;
+    round += 1;
+
+    if (score[0] == 5) {
+        winText.style.cssText = 'color: green';
+        winText.innerHTML = 'You Win';
+        gameOver = true;
+    }
+    else if (score[1] == 5) {
+        winText.style.cssText = 'color: red';
+        winText.innerHTML = 'You Lose';
+        gameOver = true;
+    }
+}
+
 function game() {
     var text;
-    var winner;
-    var result;
-    var score = [0, 0];
-    var options = ['rock', 'paper', 'scissors'];
-
-    for (i = 0; i < 5; i++) {
-        var playerSelection = prompt('rock, paper, or scissors').trim().toLowerCase();
-        while (!(options.includes(playerSelection))) {
-            playerSelection = prompt('rock, paper, or scissors').trim().toLowerCase();
+    var winner;   
+    
+    rock.onclick = () => {
+        if (gameOver) {
+            return;
         }
 
-        const computerSelection = getComputerChoice();
-    
-        var [text, winner] = playRound(playerSelection, computerSelection);
-        
-        console.log(text);
+        [text, winner] = playRound('rock', getComputerChoice());
+        processClick(text, winner);
+    }
 
-        result = scoreGame(winner);
-        score[0] += result[0];
-        score[1] += result[1];      
-    }  
+    paper.onclick = () => {
+        if (gameOver) {
+            return;
+        }
 
-    console.log(chooseWinner(score));
+        [text, winner] = playRound('paper', getComputerChoice());
+        processClick(text, winner);
+    }
+
+    scissors.onclick = () => {
+        if (gameOver) {
+            return;
+        }
+
+        [text, winner] = playRound('scissors', getComputerChoice());
+        processClick(text, winner);
+    }   
 }
 
 game();
